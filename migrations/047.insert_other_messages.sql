@@ -1,0 +1,1 @@
+INSERT INTO `messages` (`content`) VALUES('testing the update');

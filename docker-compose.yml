@@ -1,0 +1,27 @@
+version: "3"
+services:
+  database:
+    networks:
+      - database
+    image: mysql:5.7
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-password
+      MYSQL_USER: ecs
+      MYSQL_PASSWORD: ecs
+      MYSQL_DATABASE: ecs
+    ports:
+      - 3306:3306
+
+  php:
+    build: .
+    command: sleep 3600
+    working_dir: /home/app
+    networks:
+      - database
+    volumes:
+      - ./:/home/app
+    
+networks:
+  database:
